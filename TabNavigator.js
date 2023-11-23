@@ -1,12 +1,10 @@
-// TabNavigator.js
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons'; 
-// import RankingScreen from './RankingScreen';
-// import CategoryScreen from './CategoryScreen';
-// import ProfileScreen from './ProfileScreen';
+import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
+// import SearchScreen from './screens/SearchScreen/SearchScreen';
+import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
@@ -18,41 +16,42 @@ export default function TabNavigator() {
           tabBarLabel: '',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons  name="book-sharp"  color={color} size={size} />
+            <Ionicons name="book-sharp" color={color} size={size} />
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Search"
-        component={HomeScreen}
+        component={SearchScreens}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="search" size={size}color={color} />
+            <FontAwesome name="search" size={size} color={color} />
           ),
         }}
-      />
-      
+      /> */}
+
       <Tab.Screen
         name="Bookmark"
         component={HomeScreen}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="book"  color={color} size={size} />
+            <AntDesign name="book" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
         name="Profile"
-        component={HomeScreen}
+        component={ProfileScreen}
         options={{
-          tabBarLabel: '',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <Ionicons name="person-outline" color={color} size={size} />
           ),
         }}
       />
+
       {/* <Tab.Screen name="Ranking" component={RankingScreen} /> */}
       {/* <Tab.Screen name="Category" component={CategoryScreen} /> */}
       {/* <Tab.Screen name="Profile" component={ProfileScreen} /> */}
