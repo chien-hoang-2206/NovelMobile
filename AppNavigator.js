@@ -6,14 +6,13 @@ import LoginScreen from './screens/LoginScreen/LoginScreen';
 import { Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ForgotPassword from './screens/ForgotPassword/ForgotPassword';
-import SignUpScreen from './screens/SignupScreen/SignUpScreen';
 import { useAuth } from './context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import SignUp from './screens/SignUpScreen/SignUp';
 const Stack = createStackNavigator();
 
 function AppNavigator() {
   const { user } = useAuth();
-  console.log("🚀 ~ file: AppNavigator.js:16 ~ AppNavigator ~ user:", user)
   const navigation = useNavigation();
   useEffect(() => {
     if (user?._id) {
@@ -54,7 +53,7 @@ function AppNavigator() {
       />
       <Stack.Screen
         name="SignUp"
-        component={SignUpScreen}
+        component={SignUp}
         options={{
           headerShown: true,
           title: 'Your Website Name',

@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 // import SearchScreen from './screens/SearchScreen/SearchScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
+import SearchScreens from './screens/SearchScreen/Search';
 const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
@@ -20,7 +21,7 @@ export default function TabNavigator() {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Search"
         component={SearchScreens}
         options={{
@@ -29,7 +30,7 @@ export default function TabNavigator() {
             <FontAwesome name="search" size={size} color={color} />
           ),
         }}
-      /> */}
+      />
 
       <Tab.Screen
         name="Bookmark"

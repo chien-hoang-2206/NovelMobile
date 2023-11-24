@@ -1,34 +1,55 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from '../../api/axios';
+import { useAuth } from '../../context/AuthContext';
 const SignUP_URL = "/api/accounts/signup";
 
-const SignUpScreen = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
+  const { setUser } = useAuth();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  function checkValidate() {
+    if (username === '') {
+      Alert('Nhập Username');
+      return false;
+    }
+    if (password === '') {
+      Alert('Nhập password');
+      return false;
+    }
+    if (email === '') {
+      Alert('Nhập email');
+      return false;
+    }
+    return true;
+  }
   const handleSignUp = async () => {
-    try {
-      const response = await axios.post(SignUP_URL, {
-        name: username,
-        email: email,
-        password: password,
-        avatarLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/1024px-Avatar_icon_green.svg.png",
-        isAdmin: false
-      });
-  
-      if (response.data.user) {
-        // Navigate to the home screen using React Navigation
-        navigation.navigate('Login'); // Replace 'Home' with the name of your home screen
-      } else {
-        // Sign up failed, show error alert
-        setWarning(true);
+    // const isCheck = checkValidate();
+    if (true) {
+      try {
+        const response = await axios.post(SignUP_URL, {
+          name: username,
+          email: email,
+          password: password,
+          avatarLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/1024px-Avatar_icon_green.svg.png",
+          isAdmin: false
+        });
+
+        if (response.data.user) {
+          // Navigate to the home screen using React Navigation
+          setUser(response.data.user);
+          navigation.navigate('Login'); // Replace 'Home' with the name of your home screen
+        } else {
+          // Sign up failed, show error alert
+          setWarning(true);
+        }
+      } catch (error) {
+        // Handle error
+        // console.error(error.response?.data?.error || 'An error occurred');
+        alert(error.response?.data?.error || 'An error occurred');
       }
-    } catch (error) {
-      // Handle error
-      console.error(error.response?.data?.error || 'An error occurred');
-      alert(error.response?.data?.error || 'An error occurred');
     }
   };
   return (
@@ -112,4 +133,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpScreen;
+export default SignUp;
