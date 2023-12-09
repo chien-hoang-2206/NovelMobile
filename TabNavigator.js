@@ -6,6 +6,7 @@ import HomeScreen from './screens/HomeScreen/HomeScreen';
 // import SearchScreen from './screens/SearchScreen/SearchScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import SearchScreens from './screens/SearchScreen/Search';
+import RankingScreen from './screens/RankingScreen/RankingScreen';
 const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
@@ -24,6 +25,16 @@ export default function TabNavigator() {
       <Tab.Screen
         name="Search"
         component={SearchScreens}
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="search" size={size} color={color} />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="Ranking"
+        component={RankingScreen}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
