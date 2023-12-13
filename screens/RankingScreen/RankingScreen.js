@@ -2,21 +2,28 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import factories from '../../redux/app/factory';
-import RecentUpdatesList from '../../components/RecentUpdatesList/RecentUpdatesList';
+import ItemRanking from '../../components/ItemRanking/ItemRanking';
 
 const RankingScreen = ({ route, navigation }) => {
-  const [selectedInterval, setSelectedInterval] = useState('day');
+  const [selectedInterval, setSelectedInterval] = useState('view');
 
   const [newNovels, setNewNovels] = useState([]);
-  console.log("🚀 ~ file: RankingScreen.js:11 ~ RankingScreen ~ newNovels:", newNovels)
   useEffect(() => {
-    async function fetchData() {
-      const responseRecomendList = await factories.getNovelListHome();
-      const newNovelList = responseRecomendList?.novelList
-      setNewNovels(newNovelList);
+    async function fetchData(fetchFunction) {
+      try {
+        const response = await fetchFunction();
+        setNewNovels(response);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
-    fetchData();
-  }, []);
+  
+    if (selectedInterval === 'view') {
+      fetchData(factories.getListReadCount);
+    } else if (selectedInterval === 'rate') {
+      fetchData(factories.getListRateCount);
+    }
+  }, [selectedInterval]);
 
   const handleNovelPress = (novelId) => {
     // Navigate to the novel details screen or perform any other action
@@ -36,23 +43,18 @@ const RankingScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
         <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => handleIntervalChange('day')}>
-                <Text style={selectedInterval === 'day' ? styles.selectedButton : styles.button}>NGÀY</Text>
+            <TouchableOpacity onPress={() => handleIntervalChange('view')}>
+                <Text style={selectedInterval === 'view' ? styles.selectedButton : styles.button}>LƯỢT XEM</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleIntervalChange('week')}>
-                <Text style={selectedInterval === 'week' ? styles.selectedButton : styles.button}>TUẦN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleIntervalChange('month')}>
-                <Text style={selectedInterval === 'month' ? styles.selectedButton : styles.button}>THÁNG</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleIntervalChange('all')}>
-                <Text style={selectedInterval === 'all' ? styles.selectedButton : styles.button}>TỔNG</Text>
+            <TouchableOpacity onPress={() => handleIntervalChange('rate')}>
+                <Text style={selectedInterval === 'rate' ? styles.selectedButton : styles.button}>ĐÁNH GIÁ</Text>
             </TouchableOpacity>
       </View>
-      <RecentUpdatesList
+      <ItemRanking
         data={newNovels}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderNovelItem}
+        rank={selectedInterval}
       />
     </View>
   );

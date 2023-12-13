@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 // import SearchScreen from './screens/SearchScreen/SearchScreen';
@@ -18,9 +18,8 @@ export default function TabNavigator() {
           tabBarLabel: '',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="book-sharp" color={color} size={size} />
-          ),
-        }}
+            <Ionicons name="home" size={size} color={color} />          
+          )}}
       />
       <Tab.Screen
         name="Search"
@@ -38,8 +37,7 @@ export default function TabNavigator() {
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="search" size={size} color={color} />
-          ),
+          <MaterialIcons name="star-rate" size={size} color={color} />          ),
         }}
       />
 

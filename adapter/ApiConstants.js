@@ -5,6 +5,9 @@ const ApiConstants = {
     CHAPTER_NOVEL :`${BASE_PREFIX}/chapters`,
     BOOKMARK :`${BASE_PREFIX}/bookmarks`,
     HISTORY :`${BASE_PREFIX}/history`,
+    READ_COUNT: `${BASE_PREFIX}/ranking/read-rank`,
+    RATE_COUNT: `${BASE_PREFIX}/ranking/review-rank`,
+
 }
 
 export default ApiConstants
