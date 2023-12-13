@@ -55,7 +55,7 @@ const factories = {
     },
     getListRateCount: (payload) => {
         return ApiOperation.request({
-            url: `https://ebook-f995.onrender.com/api/ranking/review-rank`,
+            url: `https://ebook-f995.onrender.com/api/ranking/score-rank`,
             method: 'GET',
         });
     },

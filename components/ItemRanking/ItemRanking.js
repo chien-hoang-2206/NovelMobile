@@ -5,12 +5,12 @@ import StarRating from 'react-native-star-rating-widget';
 
 const ItemRanking = ({ data = [], rank }) => {
   const review = 4.8
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, index }) => (
     <View style={styles.itemContainer}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: item.coverLink }} style={styles.image} />
         <View style={styles.squareContainer}>
-          <Text style={styles.squareText}>{item.top}</Text>
+          <Text style={styles.squareText}>{index + 1}</Text>
         </View>
       </View>
       <View style={styles.textContainer}>
