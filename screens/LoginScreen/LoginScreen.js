@@ -6,13 +6,13 @@ const LOGIN_URL = "/api/accounts/login";
 import axios from '../../api/axios'
 import { useAuth } from '../../context/AuthContext';
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setUser } = useAuth();
   const handleSubmit = () => {
     axios
       .post(LOGIN_URL, {
-        email: username,
+        email: email,
         password: password,
       })
       .then(async (response) => {
@@ -39,9 +39,9 @@ const LoginScreen = ({ navigation }) => {
 
       <TextInput
         style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={(text) => setUsername(text)}
+        placeholder="Email"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
       />
 
       <TextInput
