@@ -46,6 +46,18 @@ const factories = {
             method: 'POST',
             data: data
         });
-    }
+    },
+    getListReadCount: (payload) => {
+        return ApiOperation.request({
+            url: `https://ebook-f995.onrender.com/api/ranking/read-rank`,
+            method: 'GET',
+        });
+    },
+    getListRateCount: (payload) => {
+        return ApiOperation.request({
+            url: `https://ebook-f995.onrender.com/api/ranking/score-rank`,
+            method: 'GET',
+        });
+    },
 }
 export default factories;

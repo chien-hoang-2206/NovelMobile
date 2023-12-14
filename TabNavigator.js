@@ -1,11 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 // import SearchScreen from './screens/SearchScreen/SearchScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import SearchScreens from './screens/SearchScreen/Search';
+import RankingScreen from './screens/RankingScreen/RankingScreen';
 const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
@@ -17,9 +18,8 @@ export default function TabNavigator() {
           tabBarLabel: '',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="book-sharp" color={color} size={size} />
-          ),
-        }}
+            <Ionicons name="home" size={size} color={color} />          
+          )}}
       />
       <Tab.Screen
         name="Search"
@@ -31,14 +31,13 @@ export default function TabNavigator() {
           ),
         }}
       />
-      <Tab.Screen
+       <Tab.Screen
         name="Ranking"
-        component={SearchScreens}
+        component={RankingScreen}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="search" size={size} color={color} />
-          ),
+          <MaterialIcons name="star-rate" size={size} color={color} />          ),
         }}
       />
 
@@ -63,10 +62,6 @@ export default function TabNavigator() {
         }}
 
       />
-
-      {/* <Tab.Screen name="Ranking" component={RankingScreen} /> */}
-      {/* <Tab.Screen name="Category" component={CategoryScreen} /> */}
-      {/* <Tab.Screen name="Profile" component={ProfileScreen} /> */}
     </Tab.Navigator>
   );
 }
