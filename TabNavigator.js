@@ -31,6 +31,16 @@ export default function TabNavigator() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Ranking"
+        component={SearchScreens}
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="search" size={size} color={color} />
+          ),
+        }}
+      />
 
       <Tab.Screen
         name="Bookmark"
@@ -46,11 +56,12 @@ export default function TabNavigator() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile',
+          title: '',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
           ),
         }}
+
       />
 
       {/* <Tab.Screen name="Ranking" component={RankingScreen} /> */}
