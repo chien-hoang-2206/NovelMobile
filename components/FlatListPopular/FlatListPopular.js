@@ -1,21 +1,29 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, FlatList, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-const Item = ({ title, illustration, index }) => (
-  <View style={styles.itemContainer}>
-    <Image source={{ uri: illustration }} style={styles.image} />
-    <View style={styles.rankContainer}>
-      <Text style={styles.rankText}>{index + 1}</Text>
-    </View>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+const Item = ({ title, illustration, index ,id}) =>{
+  const navigation = useNavigation();
+  const navigateToNovelInfo = () => {
+    navigation.navigate('NovelInfo', { id });
+  };
+  return (
+    <TouchableOpacity style={styles.itemContainer} onPress={navigateToNovelInfo}>
+      <Image source={{ uri: illustration }} style={styles.image} />
+      <View style={styles.rankContainer}>
+        <Text style={styles.rankText}>{index + 1}</Text>
+      </View>
+      <Text style={styles.title}>{title}</Text>
+    </TouchableOpacity>
+  )
+}
 
 const FlatListPopular = ({ data = [] }) => {
   const renderItem = ({ item, index }) => (
-    <Item title={item.title} illustration={item.coverLink}  index={index} />
+    <Item title={item.title} id={item._id} illustration={item.coverLink}  index={index} />
   );
 
   return (

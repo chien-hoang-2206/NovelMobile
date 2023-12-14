@@ -9,6 +9,7 @@ import ForgotPassword from './screens/ForgotPassword/ForgotPassword';
 import { useAuth } from './context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import SignUp from './screens/SignUpScreen/SignUp';
+import NovelInfo from './screens/NovelInfo/NovelInfo';
 const Stack = createStackNavigator();
 
 function AppNavigator() {
@@ -27,6 +28,14 @@ function AppNavigator() {
         name="App"
         component={TabNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NovelInfo"
+        component={NovelInfo}
+        options={{
+          headerShown: true,
+          title: '',
+        }}
       />
       <Stack.Screen
         name="Login"
@@ -97,7 +106,6 @@ function AppNavigator() {
           ),
         }}
       />
-      
     </Stack.Navigator>
   );
 }

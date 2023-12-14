@@ -55,16 +55,13 @@ export default function TabNavigator() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile',
+          title: '',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
           ),
         }}
-      />
 
-      {/* <Tab.Screen name="Ranking" component={RankingScreen} /> */}
-      {/* <Tab.Screen name="Category" component={CategoryScreen} /> */}
-      {/* <Tab.Screen name="Profile" component={ProfileScreen} /> */}
+      />
     </Tab.Navigator>
   );
 }
