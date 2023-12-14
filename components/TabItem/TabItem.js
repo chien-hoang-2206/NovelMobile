@@ -8,7 +8,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const TabItem = ({ chapterList, intro, tab, reviewList }) => {
   const navigation = useNavigation();
   const navigateToNovelChapter = (id) => {
-    console.log("🚀 ~ file: TabItem.js:11 ~ navigateToNovelChapter ~ id:", id)
     navigation.navigate('Chapter', { id });
   };
   return (

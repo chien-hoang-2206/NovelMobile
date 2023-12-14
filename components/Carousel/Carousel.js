@@ -1,6 +1,8 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { Image } from 'react-native';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -12,14 +14,17 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 //     { title: 'Item 4', illustration: 'https://placekitten.com/200/303' },
 // ];
 
-const CustomCarousel = ({data}) => {
+const CustomCarousel = ({ data }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
-
+  const navigation = useNavigation();
+  const navigateToNovelInfo = (id) => {
+    navigation.navigate('NovelInfo', { id });
+  };
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={()=> navigateToNovelInfo(item?._id)}>
       <Image src={item.coverLink} style={styles.image} />
       <Text style={styles.title}>{item.title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
