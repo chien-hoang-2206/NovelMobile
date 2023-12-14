@@ -5,18 +5,22 @@ import { styles } from './ChapterStyle';
 import factories from '../../redux/app/factory';
 import { useRoute } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import TabItem from '../../components/TabItem/TabItem';
 
 function Chapter({ navigation }) {
   const route = useRoute();
   const { id } = route.params;
   const [chapter, setChapter] = useState();
-
+  const [preIDchap, setPreIDchap] = useState();
+  const [commentList, setcommentList] = useState();
+  const [nextIDchap, setNextIDchap] = useState();
   useEffect(() => {
     async function fetchData() {
       try {
         const resp = await factories.getNovelChapterInfo(id);
         setChapter(resp?.chapter);
+        setPreIDchap(response.prev?._id)
+        setNextIDchap(response.next?._id)
+        setcommentList(resp?.commentList);
       } catch (error) {
       }
     }
@@ -50,7 +54,7 @@ function Chapter({ navigation }) {
       {/* Phần bình luận */}
       <View style={styles.commentSection}>
         {/* Hiển thị danh sách bình luận */}
-        {chapter?.comments?.map((comment, index) => (
+        {commentList?.map((comment, index) => (
           <View key={index} style={styles.commentItem}>
             <Text>{comment}</Text>
           </View>
