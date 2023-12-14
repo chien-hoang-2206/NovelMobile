@@ -10,6 +10,7 @@ import { useAuth } from './context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import SignUp from './screens/SignUpScreen/SignUp';
 import NovelInfo from './screens/NovelInfo/NovelInfo';
+import Chapter from './screens/Chapter/Chapter';
 const Stack = createStackNavigator();
 
 function AppNavigator() {
@@ -32,6 +33,14 @@ function AppNavigator() {
       <Stack.Screen
         name="NovelInfo"
         component={NovelInfo}
+        options={{
+          headerShown: true,
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="Chapter"
+        component={Chapter}
         options={{
           headerShown: true,
           title: '',

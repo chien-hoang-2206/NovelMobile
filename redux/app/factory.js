@@ -30,7 +30,7 @@ const factories = {
         return ApiOperation.request({
             url: `${ApiConstants.HISTORY}`,
             method: 'POST',
-            data: saveReadingNovel 
+            data: saveReadingNovel
         });
     },
     addBookmark: (data) => {

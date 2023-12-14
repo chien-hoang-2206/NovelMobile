@@ -60,7 +60,6 @@ export default function TabNavigator() {
             <Ionicons name="person-outline" color={color} size={size} />
           ),
         }}
-
       />
     </Tab.Navigator>
   );

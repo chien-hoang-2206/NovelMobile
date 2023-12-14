@@ -3,9 +3,9 @@ import React from 'react';
 import { View, Text, StyleSheet, Dimensions, FlatList, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+const { width: screenWidth } = Dimensions.get('window');
 
-const Item = ({ title, illustration, index ,id}) =>{
+const Item = ({ title, illustration, index, id }) => {
   const navigation = useNavigation();
   const navigateToNovelInfo = () => {
     navigation.navigate('NovelInfo', { id });
@@ -18,12 +18,12 @@ const Item = ({ title, illustration, index ,id}) =>{
       </View>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const FlatListPopular = ({ data = [] }) => {
   const renderItem = ({ item, index }) => (
-    <Item title={item.title} id={item._id} illustration={item.coverLink}  index={index} />
+    <Item title={item.title} id={item._id} illustration={item.coverLink} index={index} />
   );
 
   return (
@@ -38,6 +38,7 @@ const FlatListPopular = ({ data = [] }) => {
     />
   );
 };
+
 
 const styles = StyleSheet.create({
   itemContainer: {
