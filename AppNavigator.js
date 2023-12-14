@@ -21,7 +21,6 @@ function AppNavigator() {
   const navigation = useNavigation();
   useEffect(() => {
     if (user?._id) {
-      // User is logged in, navigate to the "App" screen
       navigation.replace = 'App';
     }
   }, [user]);

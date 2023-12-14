@@ -33,11 +33,13 @@ export const styles = StyleSheet.create({
   },
   commentSection: {
     marginTop: 20,
+    paddingVertical: 50,
   },
   commentItem: {
-    marginBottom: 10,
-    padding: 10,
     backgroundColor: '#ecf0f1',
-    borderRadius: 5,
   },
+  buttonAdd: {
+    height: 50,
+    backgroundColor: '#fff'
+  }
 });

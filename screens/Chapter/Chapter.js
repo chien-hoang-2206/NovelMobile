@@ -4,35 +4,59 @@ import { ScrollView, Text, ImageBackground, View, Image } from 'react-native';
 import { styles } from './ChapterStyle';
 import factories from '../../redux/app/factory';
 import { useRoute } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { useAuth } from '../../context/AuthContext';
 function Chapter({ navigation }) {
   const route = useRoute();
+  const { user } = useAuth();
   const { id } = route.params;
   const [chapter, setChapter] = useState();
   const [preIDchap, setPreIDchap] = useState();
+  const [content, setContent] = useState();
   const [commentList, setcommentList] = useState();
   const [nextIDchap, setNextIDchap] = useState();
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const resp = await factories.getNovelChapterInfo(id);
-        setChapter(resp?.chapter);
-        setPreIDchap(response.prev?._id)
-        setNextIDchap(response.next?._id)
-        setcommentList(resp?.commentList);
-      } catch (error) {
-      }
+  async function fetchData() {
+    try {
+      const resp = await factories.getNovelChapterInfo(id);
+      setChapter(resp?.chapter);
+      // setPreIDchap(resp?.prev?._id)
+      // setNextIDchap(resp?.next?._id)
+      setcommentList(resp?.commentList);
+    } catch (error) {
     }
+  }
+  useEffect(() => {
     fetchData();
   }, [id]);
 
+  async function handleAddComment() {
+    try {
+      const data = {
+        content: content,
+        chapterId: id,
+        accountId: user?._id
+      }
+      const resp = await factories.addComment(data)
+      if (resp?._id) {
+        fetchData();
+      }
+    } catch (errow) {
+
+    }
+  }
   function navigateToPrevChapter() {
 
   }
   function navigateToNextChapter() {
 
   }
+
+  const renderCommentItem = ({ item, index }) => (
+    <View key={index} style={styles.commentItem}>
+      <Text>{item?.name}</Text>
+      <Text>{item?.comment}</Text>
+    </View>
+  );
   return (
     <ScrollView style={styles.container}>
       {/* Tiêu đề chapter */}
@@ -54,16 +78,24 @@ function Chapter({ navigation }) {
       {/* Phần bình luận */}
       <View style={styles.commentSection}>
         {/* Hiển thị danh sách bình luận */}
-        {commentList?.map((comment, index) => (
-          <View key={index} style={styles.commentItem}>
-            <Text>{comment}</Text>
-          </View>
-        ))}
-        {/* Nút để thêm bình luận */}
-        <TouchableOpacity>
-          <Text style={styles.button}>Add Comment</Text>
-        </TouchableOpacity>
+        <FlatList
+          data={commentList}
+          renderItem={renderCommentItem}
+          keyExtractor={(item, index) => index?.toString()}
+        />
+
+        <View>
+          {/* Nút để thêm bình luận */}
+          <TextInput style={styles.buttonAdd} placeholder="Nhập bình luận mới"
+            onChangeText={(text) => setContent(text)}
+          ></TextInput>
+          <TouchableOpacity onPress={handleAddComment}>
+            <Text style={styles.button}>Thêm bình luận</Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
+
     </ScrollView>
   );
 }

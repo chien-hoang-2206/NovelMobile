@@ -40,7 +40,7 @@ const factories = {
             data: data
         });
     },
-    changeUserName: (id, userName,email) => {
+    changeUserName: (id, userName, email) => {
         return ApiOperation.request({
             url: `${ApiConstants.ACCOUNT}/${id}/update-username-email`,
             method: 'PATCH',
@@ -77,6 +77,13 @@ const factories = {
         return ApiOperation.request({
             url: `https://ebook-f995.onrender.com/api/ranking/score-rank`,
             method: 'GET',
+        });
+    },
+    addComment: (data) => {
+        return ApiOperation.request({
+            url: `https://ebook-f995.onrender.com/api/comments`,
+            method: 'POST',
+            data: data,
         });
     },
 }

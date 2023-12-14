@@ -9,7 +9,10 @@ const UsernameChangeScreen = () => {
   const handleSubmit = async () => {
     try {
       const resp = await factories.changeUserName(user?._id, username, user?.email);
-      setUser(resp?.user)
+      if (resp?.user) {
+        setUser(resp?.user)
+        alert('Đổi thông tin thành công');
+      }
     } catch (error) {
     }
   }

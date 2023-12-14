@@ -100,6 +100,16 @@ export const styles = StyleSheet.create({
     minHeight: 60,
     padding: 20,
   },
+  buttonAdd: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: '#00A7EB',
+    backgroundColor: '#E5F7FF',
+    borderRadius: 5,
+    width: 50
+  },
   button: {
     paddingTop: 10,
     paddingBottom: 10,

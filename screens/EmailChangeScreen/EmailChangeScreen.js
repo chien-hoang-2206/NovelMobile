@@ -10,7 +10,10 @@ const EmailChangeScreen = () =>{
     const handleSubmit = async()=>{
       try{
         const resp = await factories.changeUserName(user?._id, user?.name, email);
-        setUser(resp?.user)
+        if ( resp?.user){
+          setUser(resp?.user)
+          alert('Đổi email thành công')
+        }
       } catch(error){
 
       }

@@ -6,14 +6,16 @@ import factories from '../../redux/app/factory';
 import { useRoute } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import TabItem from '../../components/TabItem/TabItem';
+import { useAuth } from "../../context/AuthContext";
 
 function NovelInfo({ navigation }) {
   const route = useRoute();
-  const { id } = route.params;
   const [novelInfo, setNovelInfo] = useState();
+  const { id } = route.params;
   const [chapterList, setChapterList] = useState(null);
   const [reviewList, setReviewList] = useState(null);
   const [selectedInterval, setSelectedInterval] = useState('info');
+  const { user } = useAuth();
 
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +39,15 @@ function NovelInfo({ navigation }) {
       return `${(readCount / 1000).toFixed(1)} k`;
     } else {
       return readCount?.toString();
+    }
+  }
+
+  async function handleAdddBookmark() {
+
+    try {
+      const data = { accountId: user?._id, novelId: id };
+      const resp = await factories.addBookmark(data)
+    } catch (error) {
     }
   }
   const handleIntervalChange = (interval) => {
@@ -64,9 +75,15 @@ function NovelInfo({ navigation }) {
                 </React.Fragment>
               ))}
             </Text>
+            <TouchableOpacity style={styles.buttonAdd} onPress={() => { handleAdddBookmark() }}>
+              <Text>
+                Lưu
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ImageBackground>
+
 
       {/* Bottom section with novel details */}
       <View style={styles.container}>
@@ -80,10 +97,11 @@ function NovelInfo({ navigation }) {
             <Text style={styles.numberTitle}>{'Lượt đọc'}</Text>
           </View>
           <View style={styles.numberInfo} >
-            <Text style={styles.number}>{'20K'}</Text>
+            <Text style={styles.number}>{novelInfo?.totalReviews}</Text>
             <Text style={styles.numberTitle}>{'Bình luận'}</Text>
           </View>
         </View>
+
       </View>
       <View style={styles.tabNovel} >
         <View style={styles.buttonContainer}>
@@ -104,7 +122,6 @@ function NovelInfo({ navigation }) {
           reviewList={reviewList ?? []}
         />
       </View>
-
     </ScrollView>
   );
 }
