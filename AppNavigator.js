@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 import LoginScreen from './screens/LoginScreen/LoginScreen';
+import EmailChangeScreen from './screens/EmailChangeScreen/EmailChangeScreen';
+import PasswordChangeScreen from './screens/PasswordChangeScreen/PasswordChangeScreen';
+import UsernameChangeScreen from './screens/UsernameChangeScreen/UsernameChangeScreen';
 import { Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ForgotPassword from './screens/ForgotPassword/ForgotPassword';
@@ -10,6 +13,7 @@ import { useAuth } from './context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import SignUp from './screens/SignUpScreen/SignUp';
 import NovelInfo from './screens/NovelInfo/NovelInfo';
+import Chapter from './screens/Chapter/Chapter';
 const Stack = createStackNavigator();
 
 function AppNavigator() {
@@ -17,7 +21,6 @@ function AppNavigator() {
   const navigation = useNavigation();
   useEffect(() => {
     if (user?._id) {
-      // User is logged in, navigate to the "App" screen
       navigation.replace = 'App';
     }
   }, [user]);
@@ -32,6 +35,14 @@ function AppNavigator() {
       <Stack.Screen
         name="NovelInfo"
         component={NovelInfo}
+        options={{
+          headerShown: true,
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="Chapter"
+        component={Chapter}
         options={{
           headerShown: true,
           title: '',
@@ -103,6 +114,41 @@ function AppNavigator() {
               <Ionicons name="md-logo-snapchat" size={24} color="black" />
               <Text>`  WUXIAWORLD`</Text>
             </>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Email Change"
+        component={EmailChangeScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          headerShown: true,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name="Password Change"
+        component={PasswordChangeScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          headerShown: true,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name="Username Change"
+        component={UsernameChangeScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          headerShown: true,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" color={color} size={size} />
           ),
         }}
       />

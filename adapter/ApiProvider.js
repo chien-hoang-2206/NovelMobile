@@ -7,6 +7,7 @@ import { BASE_PREFIX } from './ApiConstants'
 // console.log("🚀 ~ file: ApiProvider.js:7 ~ BASE_URL:", BASE_URL)
 const BASE_URL = 'https://ebook-f995.onrender.com'
 
+
 const api = setupInterceptersTo(
     axios.create({
         baseURL: BASE_URL,
@@ -62,7 +63,6 @@ export const request = ({ url = '', method = 'GET', data = {}, params = {}, resp
             responseType: responseType
         })
         .then((resp) => {
-            // console.log("resp.data", resp.data)
             return resp.data
         })
         .catch((error) => { console.log(error); throw error })

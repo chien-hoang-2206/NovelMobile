@@ -1,9 +1,10 @@
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useAuth } from "../../context/AuthContext";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -15,84 +16,46 @@ const ProfileScreen = () => {
     navigation.navigate('Login'); // Replace 'Login' with the name of your login screen
   };
 
-  return (
-    <ScrollView style={styles.container}>
-      {/* Cover Photo */}
-      <Image
-        source={{
-          uri: 'cover_photo_url_here', // Replace with the actual cover photo URL
-        }}
-        style={styles.coverPhoto}
-      />
+  const handleEmailChange = async()=>{
+    navigation.navigate('Email Change');
+  }
 
-      <View style={styles.profileContainer}>
-        {/* Display user avatar */}
+  const handlePasswordChange = async()=>{
+    navigation.navigate('Password Change');
+  }
+
+  const handleUsernameChange = async()=>{
+    navigation.navigate('Username Change');
+  }
+
+  return (
+    <ScrollView style = {styles.container}>
+      <View style = {styles.profileContainer}>
         <Image
-          source={{
+         source={{
             uri: user?.avatarLink,
           }}
           style={styles.avatar}
         />
-
-        {/* Display user information */}
-        <Text style={styles.username}>{user?.name}</Text>
-        <Text style={styles.bio}>Passionate about reading and exploring new worlds. 📚✨</Text>
-        {/* Add more user information as needed */}
-
-        {/* Options */}
-        <View style={styles.optionsContainer}>
-          <View style={styles.optionBlock}>
-            <TouchableOpacity style={styles.optionButton}>
-              <Ionicons name="person-outline" color="black" size={24} />
-              <Text style={styles.optionText}>Manage Profile</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.optionBlock}>
-            <TouchableOpacity style={styles.optionButton}>
-              <Ionicons name="heart-outline" color="black" size={24} />
-              <Text style={styles.optionText}>Favorite Stories</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.optionBlock}>
-            <TouchableOpacity style={styles.optionButton}>
-              <Ionicons name="settings-outline" color="black" size={24} />
-              <Text style={styles.optionText}>Account Settings</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Additional Tasks */}
-        <View style={styles.tasksContainer}>
-          <View style={styles.taskBlock}>
-            <TouchableOpacity style={styles.taskButton}>
-              <Ionicons name="bookmark-outline" color="black" size={24} />
-              <Text style={styles.taskText}>Read Later</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.taskBlock}>
-            <TouchableOpacity style={styles.taskButton}>
-              <Ionicons name="time-outline" color="black" size={24} />
-              <Text style={styles.taskText}>History</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.taskBlock}>
-            <TouchableOpacity style={styles.taskButton}>
-              <Ionicons name="star-outline" color="black" size={24} />
-              <Text style={styles.taskText}>Rated Stories</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Logout button */}
-        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-          <Ionicons name="log-out-outline" color="black" size={24} />
-          <Text style={styles.logoutButtonText}>Logout</Text>
-        </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={handleUsernameChange}>
+          <Text style = {styles.username}>{user?.name}</Text>
+        </TouchableWithoutFeedback>
       </View>
+      <View style = {styles.infocontainer}>
+          <TouchableWithoutFeedback style={styles.touchableWrapper} onPress={handleEmailChange}>
+            <Text style= {styles.label}>Đổi Email</Text>
+          </TouchableWithoutFeedback>
+      
+          <TouchableWithoutFeedback style={styles.touchableWrapper} onPress={handlePasswordChange}>
+            <Text style= {styles.label}>Đổi Password</Text>
+          </TouchableWithoutFeedback>
+
+      </View>
+      {/* Logout button */}
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Ionicons name="log-out-outline" color="black" size={24} />
+        <Text style={styles.logoutButtonText}>Logout</Text>
+      </TouchableOpacity>  
     </ScrollView>
   );
 };
@@ -100,6 +63,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 2,
+    backgroundColor:"white"
   },
   coverPhoto: {
     width: "100%",
@@ -108,7 +72,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     alignItems: "center",
     backgroundColor: "white",
-    marginTop: -50,
+    marginTop: -8,
     borderRadius: 10,
     paddingVertical: 20,
   },
@@ -121,7 +85,7 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: 3,
   },
   bio: {
     fontSize: 14,
@@ -129,49 +93,48 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
   },
-  optionsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-    marginVertical: 10,
-  },
-  optionBlock: {
-    width: "30%",
+  infocontainer: {
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
+    gap: 5
   },
-  optionButton: {
-    alignItems: "center",
+  label:{
+    fontSize:16,
+    fontWeight:"bold",
+    borderWidth:0.5,
+    textAlign:"center",
+    backgroundColor:"grey",
+    borderColor:"black",
+    paddingTop:3,
+    paddingBottom:3,
+    borderRadius:30,
+    color:"white"
   },
-  optionText: {
-    marginTop: 5,
-    fontSize: 14,
-  },
-  tasksContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-    marginVertical: 10,
-  },
-  taskBlock: {
-    width: "30%",
-    alignItems: "center",
-  },
-  taskButton: {
-    alignItems: "center",
-  },
-  taskText: {
-    marginTop: 5,
-    fontSize: 14,
+  field: {
+    marginTop:5,
+    marginBottom:5,
+    borderWidth: 1,
+    width:'100%',
+    borderColor: '#ddd',
+    borderRadius: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 5, 
   },
   logoutButton: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 20,
+    justifyContent:"center"
   },
   logoutButtonText: {
     marginLeft: 10,
     fontSize: 18,
   },
+  touchableWrapper:{
+    width:300,
+  }
 });
 
 export default ProfileScreen;

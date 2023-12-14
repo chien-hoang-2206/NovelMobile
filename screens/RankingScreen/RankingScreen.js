@@ -17,7 +17,7 @@ const RankingScreen = ({ route, navigation }) => {
         console.error("Error fetching data:", error);
       }
     }
-  
+
     if (selectedInterval === 'view') {
       fetchData(factories.getListReadCount);
     } else if (selectedInterval === 'rate') {
@@ -25,9 +25,7 @@ const RankingScreen = ({ route, navigation }) => {
     }
   }, [selectedInterval]);
 
-  const handleNovelPress = (novelId) => {
-    // Navigate to the novel details screen or perform any other action
-    console.log('Pressed on novel with ID:', novelId);
+  const navigateToNovelInfo = (id) => {
   };
   const handleIntervalChange = (interval) => {
     setSelectedInterval(interval);
@@ -35,20 +33,20 @@ const RankingScreen = ({ route, navigation }) => {
   const renderNovelItem = ({ item }) => (
     <TouchableOpacity
       style={styles.novelItem}
-      onPress={() => handleNovelPress(item.id)}
+      onPress={() => navigateToNovelInfo(item.id)}
     >
       <Text style={styles.novelTitle}>{item.title}</Text>
     </TouchableOpacity>
   );
   return (
     <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => handleIntervalChange('view')}>
-                <Text style={selectedInterval === 'view' ? styles.selectedButton : styles.button}>LƯỢT XEM</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleIntervalChange('rate')}>
-                <Text style={selectedInterval === 'rate' ? styles.selectedButton : styles.button}>ĐÁNH GIÁ</Text>
-            </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => handleIntervalChange('view')}>
+          <Text style={selectedInterval === 'view' ? styles.selectedButton : styles.button}>LƯỢT XEM</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleIntervalChange('rate')}>
+          <Text style={selectedInterval === 'rate' ? styles.selectedButton : styles.button}>ĐÁNH GIÁ</Text>
+        </TouchableOpacity>
       </View>
       <ItemRanking
         data={newNovels}

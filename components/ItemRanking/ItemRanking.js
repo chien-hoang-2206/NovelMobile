@@ -1,12 +1,17 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import StarRating from 'react-native-star-rating-widget';
 
 
 const ItemRanking = ({ data = [], rank }) => {
-  const review = 4.8
+  const navigation = useNavigation();
+  const navigateToNovelInfo = (id) => {
+    navigation.navigate('NovelInfo', { id });
+  };
   const renderItem = ({ item, index }) => (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={() => navigateToNovelInfo(item._id)} >
       <View style={styles.imageContainer}>
         <Image source={{ uri: item.coverLink }} style={styles.image} />
         <View style={styles.squareContainer}>
@@ -15,21 +20,21 @@ const ItemRanking = ({ data = [], rank }) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{item.title}</Text>
-          <>
+        <>
           <View style={styles.ratingContainer}>
             <Text style={styles.infoStar}>{item.averageRating ? item.averageRating : 5}</Text>
-            <StarRating 
-              rating={1} 
+            <StarRating
+              rating={1}
               color='#ffd700'
               starSize={16}
               maxStars={1}
-              starStyle={{padding: 0}}
+              starStyle={{ padding: 0 }}
             />
           </View>
-            <Text style={styles.info}>Lượt đọc: {item.readCount}</Text>
-          </>
+          <Text style={styles.info}>Lượt đọc: {item.readCount}</Text>
+        </>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (

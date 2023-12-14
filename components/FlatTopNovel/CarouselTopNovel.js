@@ -1,30 +1,32 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, FlatList, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/core';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
-const data = [
-  { title: `Hoa Sơn Tái Khởi`, illustration: 'https://placekitten.com/200/300' },
-  { title: 'Item 2', illustration: 'https://placekitten.com/200/301' },
-  { title: 'Item 3', illustration: 'https://placekitten.com/200/302' },
-  { title: 'Item 4', illustration: 'https://placekitten.com/200/303' },
-];
 
-const Item = ({ title, illustration , type }) => (
-  <View style={styles.itemContainer}>
-    <Image source={{ uri: illustration }} style={styles.image} />
-    <LinearGradient
-      colors={['rgb(112, 170, 244)', 'rgba(0,0,0,0.1)']}
-      style={styles.gradient}
-    />
-    <Text style={styles.typeText}>{type}</Text>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+const Item = ({ title, illustration, type, id }) => {
+  const navigation = useNavigation();
+  const navigateToNovelInfo = id => {
+    navigation.navigate('NovelInfo', { id });
+  };
+  return (
+    <TouchableOpacity style={styles.itemContainer} onPress={() => navigateToNovelInfo(id)}>
+      <Image source={{ uri: illustration }} style={styles.image} />
+      <LinearGradient
+        colors={['rgb(112, 170, 244)', 'rgba(0,0,0,0.1)']}
+        style={styles.gradient}
+      />
+      <Text style={styles.typeText}>{type}</Text>
+      <Text style={styles.title}>{title}</Text>
+    </TouchableOpacity>
+  )
+};
 
-const CarouselTopNovel = ({data = []}) => {
+const CarouselTopNovel = ({ data = [] }) => {
   const renderItem = ({ item }) => (
-    <Item title={item.title} illustration={item.coverLink} type ={item?.types[0]} />
+    <Item title={item.title} illustration={item.coverLink} id={item?._id} type={item?.types[0]} />
   );
 
   return (
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     marginHorizontal: '23%',
     borderRadius: 10,
     marginTop: '16%',
-    zIndex:4,
+    zIndex: 4,
   },
   gradient: {
     ...StyleSheet.absoluteFillObject,
