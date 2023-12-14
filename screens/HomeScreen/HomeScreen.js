@@ -11,8 +11,8 @@ import { useAuth } from '../../context/AuthContext';
 
 function HomeScreen({ navigation }) {
   const [newNovels, setNewNovels] = useState([]);
-  const [newNovels2, setNewNovels2] = useState([]);
-  const {user} = useAuth();
+  const [newNovels2, setReadingNovels] = useState([]);
+  const { user } = useAuth();
   useEffect(() => {
     async function fetchData() {
       const responseRecomendList = await factories.getNovelListHome();
@@ -27,7 +27,7 @@ function HomeScreen({ navigation }) {
       if (user) {
         const responseReadinglist = await factories.getReadingNovelList(user?._id);
         const newList = responseReadinglist?.historyList
-        setReadingNovels(setNewNovels2);
+        setReadingNovels(newList ?? []);
       }
     }
     fetchData2();
@@ -58,7 +58,7 @@ function HomeScreen({ navigation }) {
 
         <HomeStyle.TopNovelContainer>
           <HomeStyle.H1>Most Recently Updated</HomeStyle.H1>
-          <RecentUpdatesList data={newNovels2} />
+          <RecentUpdatesList data={newNovels} />
         </HomeStyle.TopNovelContainer>
       </HomeStyle.Container>
     </ScrollView>

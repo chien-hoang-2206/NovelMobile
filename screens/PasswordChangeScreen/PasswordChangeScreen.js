@@ -14,8 +14,10 @@ const PasswordChangeScreen = () =>{
     if(newPassword === reloadNewPassowrd){
       try{
         const resp = await factories.changePassword(user?._id, user?.password, newPassword);
-        setUser(resp?.user);
-        alert('Update Success');
+        if ( resp?.user){
+          setUser(resp?.user);
+          alert('Update Success');
+        }
       } catch(error){}
     } else{
       alert('Mật khẩu không khớp');

@@ -16,7 +16,6 @@ const LoginScreen = ({ navigation }) => {
         password: password,
       })
       .then(async (response) => {
-
         if (response.data.user) {
           setUser(response.data.user);
           navigation.navigate('App');
@@ -56,10 +55,10 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.googleButton} onPress={handleLoginWithGoogle}>
+      {/* <TouchableOpacity style={styles.googleButton} onPress={handleLoginWithGoogle}>
         <AntDesign name="google" size={24} color="#111" style={styles.googleLogo} />
         <Text style={styles.buttonTextGG}>Login with Google</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
         <Text style={styles.linkText}>Forgot Password?</Text>
