@@ -1,19 +1,27 @@
 
+import { useState } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, TextInput, Button, Pressable } from "react-native";
 import { useAuth } from "../../context/AuthContext";
+import factories from "../../redux/app/factory";
 
 const EmailChangeScreen = () =>{
-    const {user} = useAuth();
+    const [email, setEmail] = useState('');
+    const {user,setUser} = useAuth();
+    const handleSubmit = async()=>{
+      try{
+        const resp = await factories.changeUserName(user?._id, user?.name, email);
+        setUser(resp?.user)
+      } catch(error){
+
+      }
+    }
     return(
         <ScrollView style = {styles.container}>
             <View style = {styles.infocontainer}>
                   <Text style= {styles.label}>Email</Text>
-                  <TextInput style= {styles.field} placeholder="Nhập email mới"></TextInput>
-
-                  <Text style= {styles.label}>Mật Khẩu</Text>
-                  <TextInput style= {styles.field} placeholder="Nhập mật khẩu"></TextInput>
+                  <TextInput style= {styles.field} placeholder="Nhập email mới" value={email} onChangeText={(text)=> setEmail(text)}></TextInput>
             </View>
-           <Pressable style={styles.button}>
+           <Pressable style={styles.button} onPress={handleSubmit}>
             <Text style={styles.textButton}>Save</Text>
            </Pressable>
         </ScrollView>
