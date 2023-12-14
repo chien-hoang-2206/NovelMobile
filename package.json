@@ -30,7 +30,10 @@
     "react-native-screens": "~3.22.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-star-rating-widget": "^1.7.3",
-    "styled-components": "^6.1.1"
+    "react-native-svg": "^14.1.0",
+    "styled-components": "^6.1.1",
+    "react-native-web": "~0.19.6",
+    "@expo/webpack-config": "^19.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
