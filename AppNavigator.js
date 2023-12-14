@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 import LoginScreen from './screens/LoginScreen/LoginScreen';
+import EmailChangeScreen from './screens/EmailChangeScreen/EmailChangeScreen';
+import PasswordChangeScreen from './screens/PasswordChangeScreen/PasswordChangeScreen';
+import UsernameChangeScreen from './screens/UsernameChangeScreen/UsernameChangeScreen';
 import { Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ForgotPassword from './screens/ForgotPassword/ForgotPassword';
@@ -96,6 +99,41 @@ function AppNavigator() {
             </>
           ),
         }}
+      />
+      <Stack.Screen
+          name="Email Change"
+          component={EmailChangeScreen}
+          options={{
+            tabBarLabel: 'Profile',
+            headerShown: true,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="person-outline" color={color} size={size} />
+            ),
+          }}
+      />
+
+        <Stack.Screen
+          name="Password Change"
+          component={PasswordChangeScreen}
+          options={{
+            tabBarLabel: 'Profile',
+            headerShown: true,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="person-outline" color={color} size={size} />
+            ),
+          }}
+      />
+
+      <Stack.Screen
+          name="Username Change"
+          component={UsernameChangeScreen}
+          options={{
+            tabBarLabel: 'Profile',
+            headerShown: true,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="person-outline" color={color} size={size} />
+            ),
+          }}
       />
       
     </Stack.Navigator>

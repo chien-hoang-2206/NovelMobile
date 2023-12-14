@@ -6,6 +6,7 @@ import HomeScreen from './screens/HomeScreen/HomeScreen';
 // import SearchScreen from './screens/SearchScreen/SearchScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import SearchScreens from './screens/SearchScreen/Search';
+import EmailChangeScreen from './screens/EmailChangeScreen/EmailChangeScreen';
 const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
@@ -52,7 +53,6 @@ export default function TabNavigator() {
           ),
         }}
       />
-
       {/* <Tab.Screen name="Ranking" component={RankingScreen} /> */}
       {/* <Tab.Screen name="Category" component={CategoryScreen} /> */}
       {/* <Tab.Screen name="Profile" component={ProfileScreen} /> */}
