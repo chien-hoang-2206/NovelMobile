@@ -50,6 +50,16 @@ const factories = {
             }
         });
     },
+    changePassword:(id, oldPassword, newPassword) =>{
+        return ApiOperation.request({
+            url: `${ApiConstants.ACCOUNT}/${id}/update-password`,
+            method: 'PUT',
+            data: {
+                oldPassword: oldPassword,
+                newPassword: newPassword
+            }
+        })
+    },
     addChapter: data => {
         return ApiOperation.request({
             url: `${ApiConstants.CHAPTER_NOVEL}`,
