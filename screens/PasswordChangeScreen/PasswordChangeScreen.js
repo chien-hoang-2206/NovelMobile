@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, TextInput,
 import { useAuth } from "../../context/AuthContext";
 import factories from "../../redux/app/factory";
 
-const PasswordChangeScreen = () =>{
+const PasswordChangeScreen =() =>{
 
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
