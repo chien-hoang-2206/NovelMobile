@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import SearchScreens from './screens/SearchScreen/Search';
 import RankingScreen from './screens/RankingScreen/RankingScreen';
+import Bookmark from './screens/Bookmark/Bookmark';
 const Tab = createBottomTabNavigator();
 export default function TabNavigator() {
   return (
@@ -43,7 +44,7 @@ export default function TabNavigator() {
 
       <Tab.Screen
         name="Bookmark"
-        component={HomeScreen}
+        component={Bookmark}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (

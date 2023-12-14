@@ -79,6 +79,25 @@ const factories = {
             method: 'GET',
         });
     },
+    getBookmarks: (accountId, keyword) => {
+      return ApiOperation.request({
+        url: `${ApiConstants.BOOKMARK}/${accountId}`,
+        method: "GET",
+        params: { keyword: keyword },
+      });
+    },
+    deleteBookmarks: (accountId, novelId) => {
+      return ApiOperation.request({
+        url: `${ApiConstants.BOOKMARK}/${accountId}/${novelId}`,
+        method: "DELETE",
+      });
+    },
+    postBookmark: (accountId, novelId) => {
+      return ApiOperation.request({
+        url: `${ApiConstants.BOOKMARK}/${accountId}/${novelId}`,
+        method: "POST",
+      });
+    },
     addComment: (data) => {
         return ApiOperation.request({
             url: `https://ebook-f995.onrender.com/api/comments`,
