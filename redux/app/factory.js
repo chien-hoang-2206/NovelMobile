@@ -40,6 +40,16 @@ const factories = {
             data: data
         });
     },
+    changeUserName: (id, userName,email) => {
+        return ApiOperation.request({
+            url: `${ApiConstants.ACCOUNT}/${id}/update-username-email`,
+            method: 'PATCH',
+            data: {
+                username: userName,
+                email: email
+            }
+        });
+    },
     addChapter: data => {
         return ApiOperation.request({
             url: `${ApiConstants.CHAPTER_NOVEL}`,
