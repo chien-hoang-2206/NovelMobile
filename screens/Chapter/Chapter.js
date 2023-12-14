@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, ImageBackground, View, Image } from 'react-native';
 import { styles } from './ChapterStyle';
 import factories from '../../redux/app/factory';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { useAuth } from '../../context/AuthContext';
 function Chapter({ navigation }) {
@@ -19,8 +19,8 @@ function Chapter({ navigation }) {
     try {
       const resp = await factories.getNovelChapterInfo(id);
       setChapter(resp?.chapter);
-      // setPreIDchap(resp?.prev?._id)
-      // setNextIDchap(resp?.next?._id)
+      setPreIDchap(resp?.prev?._id)
+      setNextIDchap(resp?.next?._id)
       setcommentList(resp?.commentList);
     } catch (error) {
     }
@@ -45,18 +45,15 @@ function Chapter({ navigation }) {
     }
   }
   function navigateToPrevChapter() {
-
+    navigation.navigate("Chapter", { id: preIDchap });
   }
   function navigateToNextChapter() {
-
+    navigation.navigate("Chapter", { id: nextIDchap });
   }
 
-  const renderCommentItem = ({ item, index }) => (
-    <View key={index} style={styles.commentItem}>
-      <Text>{item?.name}</Text>
-      <Text>{item?.comment}</Text>
-    </View>
-  );
+
+
+  console.log("🚀 ~ file: Chapter.js:88 ~ Chapter ~ user:", user)
   return (
     <ScrollView style={styles.container}>
       {/* Tiêu đề chapter */}
@@ -78,12 +75,20 @@ function Chapter({ navigation }) {
       {/* Phần bình luận */}
       <View style={styles.commentSection}>
         {/* Hiển thị danh sách bình luận */}
-        <FlatList
-          data={commentList}
-          renderItem={renderCommentItem}
-          keyExtractor={(item, index) => index?.toString()}
-        />
-
+        <View>
+          <Text style={styles.titleCmt}>Danh sách bình luận</Text>
+        </View>
+        {commentList?.map(item =>
+          <View style={styles.review}>
+            <Image style={styles.avatar} source={{ uri: user?.avatarLink }} />
+            <View style={styles.reviewInfo}>
+              <View style={styles.reviewHeader}>
+                <Text style={styles.title}> {item?.postedBy?.name}</Text>
+              </View>
+              <Text style={styles.contentReview}>{item?.content}</Text>
+            </View>
+          </View>)
+        }
         <View>
           {/* Nút để thêm bình luận */}
           <TextInput style={styles.buttonAdd} placeholder="Nhập bình luận mới"

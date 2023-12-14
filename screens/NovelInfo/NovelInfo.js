@@ -55,35 +55,34 @@ function NovelInfo({ navigation }) {
   };
   return (
     <ScrollView>
-      <ImageBackground
-        source={{ uri: novelInfo?.coverLink ?? '' }}
-        style={styles.backgroundImage}
-        blurRadius={6}
-      >
-        <View style={styles.imageInfo}>
-          {novelInfo && (
+      {novelInfo && (
+        <ImageBackground
+          source={{ uri: novelInfo?.coverLink ?? '' }}
+          style={styles.backgroundImage}
+          blurRadius={6}
+        >
+          <View style={styles.imageInfo}>
             <Image source={{ uri: novelInfo?.coverLink ?? '' }} style={styles.image} />
-          )}
-          <View style={styles.novelInfo}>
-            <Text style={styles.title}>{`${novelInfo?.title}`}</Text>
-            <Text style={styles.author}>{`Tác giả: ${novelInfo?.author}`}</Text>
-            <Text style={styles.author}>
-              {novelInfo?.types?.map((item, index) => (
-                <React.Fragment key={index}>
-                  {(index !== 0) && ', '}
-                  <Text>{item}</Text>
-                </React.Fragment>
-              ))}
-            </Text>
-            <TouchableOpacity style={styles.buttonAdd} onPress={() => { handleAdddBookmark() }}>
-              <Text>
-                Lưu
+            <View style={styles.novelInfo}>
+              <Text style={styles.title}>{`${novelInfo?.title}`}</Text>
+              <Text style={styles.author}>{`Tác giả: ${novelInfo?.author}`}</Text>
+              <Text style={styles.author}>
+                {novelInfo?.types?.map((item, index) => (
+                  <React.Fragment key={index}>
+                    {(index !== 0) && ', '}
+                    <Text>{item}</Text>
+                  </React.Fragment>
+                ))}
               </Text>
-            </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonAdd} onPress={() => { handleAdddBookmark() }}>
+                <Text>
+                  Lưu
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-
+        </ImageBackground>
+      )}
 
       {/* Bottom section with novel details */}
       <View style={styles.container}>

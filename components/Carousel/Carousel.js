@@ -21,8 +21,8 @@ const CustomCarousel = ({ data }) => {
     navigation.navigate('NovelInfo', { id });
   };
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.itemContainer} onPress={()=> navigateToNovelInfo(item?._id)}>
-      <Image src={item.coverLink} style={styles.image} />
+    <TouchableOpacity style={styles.itemContainer} onPress={() => navigateToNovelInfo(item?._id)}>
+      <Image source={{ uri: item.coverLink }} style={styles.image} />
       <Text style={styles.title}>{item.title}</Text>
     </TouchableOpacity>
   );

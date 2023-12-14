@@ -17,15 +17,6 @@ const SearchResultsScreen = ({ route, navigation }) => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const responseSearchResults = await factories.searchNovels(searchTerm);
-  //     const results = responseSearchResults?.searchResults;
-  //     setSearchResults(results);
-  //   }
-  //   fetchData();
-  // }, [searchTerm]);
-
   const handleNovelPress = (novelId) => {
     // Navigate to the novel details screen or perform any other action
     console.log('Pressed on novel with ID:', novelId);

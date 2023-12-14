@@ -23,6 +23,9 @@ function AppNavigator() {
     if (user?._id) {
       navigation.replace = 'App';
     }
+    else {
+      navigation.navigate('Login')
+    }
   }, [user]);
 
   return (

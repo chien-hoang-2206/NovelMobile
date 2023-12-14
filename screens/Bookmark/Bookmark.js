@@ -20,18 +20,16 @@ function Bookmark() {
     debouncedSetParam(value);
   };
 
+  async function fetchData() {
+    const response = await factories.getBookmarks(idUser, param);
+    const newNovelList = response.bookmarkList;
+    setNewNovels(newNovelList);
+  }
   useEffect(() => {
-    async function fetchData() {
-      const response = await factories.getBookmarks(idUser, param);
-      const newNovelList = response.bookmarkList;
-      setNewNovels(newNovelList);
-    }
     fetchData();
   }, [param]);
 
   const novelInfo = newNovels.map((item) => item.novelInfo);
-  console.log(novelInfo);
-  console.log(user?._id);
 
   return (
     <ScrollView>
@@ -44,7 +42,7 @@ function Bookmark() {
           />
         </View>
         <HomeStyle.TopNovelContainer>
-          <ItemBookmark data={novelInfo} />
+          <ItemBookmark data={novelInfo}  reload={fetchData}/>
         </HomeStyle.TopNovelContainer>
       </HomeStyle.Container>
     </ScrollView>

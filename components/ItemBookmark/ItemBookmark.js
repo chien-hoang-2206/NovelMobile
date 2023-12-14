@@ -5,13 +5,14 @@ import factories from "../../redux/app/factory";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 
-const ItemBookmark = ({ data = [] }) => {
+const ItemBookmark = ({ data = [] ,reload}) => {
   const { user } = useAuth();
   const [status, setStatus] = useState(true);
   const navigation = useNavigation();
 
   const onDeleteBookmark = async (item) => {
     const response = await factories.deleteBookmarks(user?._id, item._id);
+    reload();
     if (!response.error) {
       alert("Unmarked the novel");
     } else {

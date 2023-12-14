@@ -3,9 +3,11 @@ import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useAuth } from '../../context/AuthContext';
 
 
 const TabItem = ({ chapterList, intro, tab, reviewList }) => {
+  const { user } = useAuth();
   const navigation = useNavigation();
   const navigateToNovelChapter = (id) => {
     navigation.navigate('Chapter', { id });
@@ -25,7 +27,7 @@ const TabItem = ({ chapterList, intro, tab, reviewList }) => {
         return (
           <TouchableOpacity key={index}>
             <View style={styles.review}>
-              <Image style={styles.avatar} source={''} />
+              {/* <Image style={styles.avatar} source={{ uri: user?.avatarLink }} /> */}
               <View style={styles.reviewInfo}>
                 <View style={styles.reviewHeader}>
                   <Text style={styles.title}> {item?.accountInfo?.name}</Text>
