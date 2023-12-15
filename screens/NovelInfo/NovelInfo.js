@@ -14,6 +14,7 @@ function NovelInfo({ navigation }) {
   const { id } = route.params;
   const [chapterList, setChapterList] = useState(null);
   const [reviewList, setReviewList] = useState(null);
+  console.log("🚀 ~ file: NovelInfo.js:17 ~ NovelInfo ~ reviewList:", reviewList)
   const [selectedInterval, setSelectedInterval] = useState('info');
   const { user } = useAuth();
 
@@ -24,8 +25,19 @@ function NovelInfo({ navigation }) {
         const newNovel = resp?.novelInfo[0];
         setNovelInfo(newNovel);
         setNovelInfo(newNovel);
-        setReviewList(resp?.reviewList);
         setChapterList(resp?.chapterList);
+      } catch (error) {
+      }
+    }
+    fetchData();
+  }, [id]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const resp = await factories.getNovelInfoReview(id);
+        const dataa= resp?.reviewInfo?.reviewList
+        setReviewList(dataa);
       } catch (error) {
       }
     }

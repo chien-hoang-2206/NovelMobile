@@ -3,6 +3,7 @@ const ApiConstants = {
     HOME :`${BASE_PREFIX}/novels`,
     READING_HISTORY_ACC :`${BASE_PREFIX}/history`,
     CHAPTER_NOVEL :`${BASE_PREFIX}/chapters`,
+    REVIEW :`${BASE_PREFIX}/reviews`,
     BOOKMARK :`${BASE_PREFIX}/bookmarks`,
     ACCOUNT :`${BASE_PREFIX}/accounts`,
     HISTORY :`${BASE_PREFIX}/history`,

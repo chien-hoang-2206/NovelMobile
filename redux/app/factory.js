@@ -20,6 +20,13 @@ const factories = {
             method: 'GET',
         });
     },
+    getNovelInfoReview: (id) => {
+        return ApiOperation.request({
+            url: `${ApiConstants.REVIEW}/${id}`,
+            params: {},
+            method: 'GET',
+        });
+    },
     getNovelChapterInfo: (id) => {
         return ApiOperation.request({
             url: `${ApiConstants.CHAPTER_NOVEL}/${id}`,

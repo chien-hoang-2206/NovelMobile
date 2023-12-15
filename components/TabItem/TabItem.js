@@ -27,7 +27,7 @@ const TabItem = ({ chapterList, intro, tab, reviewList }) => {
         return (
           <TouchableOpacity key={index}>
             <View style={styles.review}>
-              {/* <Image style={styles.avatar} source={{ uri: user?.avatarLink }} /> */}
+              <Image style={styles.avatar} source={{ uri: item?.accountInfo?.avatarLink }} />
               <View style={styles.reviewInfo}>
                 <View style={styles.reviewHeader}>
                   <Text style={styles.title}> {item?.accountInfo?.name}</Text>
@@ -56,11 +56,12 @@ const styles = StyleSheet.create({
   review: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 30
+    gap: 10
   },
   avatar: {
+    marginLeft: 10,
     width: 50,
-    heigh: 50,
+    height: 50,
   },
   reviewInfo: {
     display: 'flex',
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 80,
-    height: 120,
+    height: 80,
     borderRadius: 8,
   },
   squareContainer: {
@@ -126,8 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   contentReview: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 17,
     marginLeft: 5,
   },
 

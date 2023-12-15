@@ -37,9 +37,7 @@ function Chapter({ navigation }) {
         accountId: user?._id
       }
       const resp = await factories.addComment(data)
-      if (resp?._id) {
-        fetchData();
-      }
+      fetchData();
     } catch (errow) {
 
     }
@@ -52,8 +50,6 @@ function Chapter({ navigation }) {
   }
 
 
-
-  console.log("🚀 ~ file: Chapter.js:88 ~ Chapter ~ user:", user)
   return (
     <ScrollView style={styles.container}>
       {/* Tiêu đề chapter */}
