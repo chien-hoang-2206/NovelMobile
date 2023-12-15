@@ -12,15 +12,15 @@ const SignUp = ({ navigation }) => {
 
   function checkValidate() {
     if (username === '') {
-      Alert('Nhập Username');
+      Alert('Vui lòng nhập Username');
       return false;
     }
     if (password === '') {
-      Alert('Nhập password');
+      Alert('Vui lòng nhập password');
       return false;
     }
     if (email === '') {
-      Alert('Nhập email');
+      Alert('Vui lòng nhập email');
       return false;
     }
     return true;
@@ -30,46 +30,39 @@ const SignUp = ({ navigation }) => {
     if (true) {
       try {
         const response = await axios.post(SignUP_URL, {
-          name: username,
-          email: email,
-          password: password,
-          avatarLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/1024px-Avatar_icon_green.svg.png",
+           name: username,
+           email: email,
+           password: password,
+           avatarLink: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/1024px-Avatar_icon_green.svg.png",
           isAdmin: false
         });
 
         if (response.data.user) {
-          // Navigate to the home screen using React Navigation
-          setUser(response.data.user);
-          navigation.navigate('Login'); // Replace 'Home' with the name of your home screen
+           setUser(response.data.user);
+          navigation.navigate('Login');
         } else {
-          // Sign up failed, show error alert
           setWarning(true);
         }
       } catch (error) {
-        // Handle error
-        // console.error(error.response?.data?.error || 'An error occurred');
-        alert(error.response?.data?.error || 'An error occurred');
+        alert(error.response?.data?.error || 'Lỗi');
       }
     }
   };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
-
       <TextInput
         style={styles.input}
         placeholder="Username"
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
-
       <TextInput
         style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
-
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -77,11 +70,9 @@ const SignUp = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={styles.linkText}>Already have an account? Login</Text>
       </TouchableOpacity>
